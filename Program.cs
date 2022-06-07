@@ -14,7 +14,8 @@ namespace LearningDiary
 
             do
             {
-                Console.Write("Kirjoita aiheen otsikko: ");
+                //Kommentti
+                Console.Write("Write the title: ");
                 string title = Console.ReadLine();
                 userInputs.TheTitle = title;
 
