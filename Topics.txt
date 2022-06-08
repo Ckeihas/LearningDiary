@@ -1,0 +1,3 @@
+System.Collections.Generic.List`1[System.String]
+System.String[]
+Hedelmäsalaatti Hedelmäsalaatin teko 5 Google 2.2.2022 0.00.00 False 1.1.2023 0.00.00
