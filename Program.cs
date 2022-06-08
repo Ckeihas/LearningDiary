@@ -14,8 +14,10 @@ namespace LearningDiary
             string path = @"C:\Users\ChristianKeihäs\source\repos\LearningDiary\Topics.txt";
 
 
+                Console.WriteLine("Write ID: ");
+                userInputs.Id = int.Parse(Console.ReadLine());
 
-            Console.WriteLine("Write the title: ");
+                Console.WriteLine("Write the title: ");
                 userInputs.TheTitle = Console.ReadLine();
 
                 Console.WriteLine("Write the description: ");
@@ -51,13 +53,14 @@ namespace LearningDiary
                 }
 
                 inputsList.Add(
-                    userInputs.TheTitle + " " +
-                    userInputs.TheDescription + " " +
-                    userInputs.TheUsedTime + " " +
-                    userInputs.TheSource + " " +
-                    userInputs.StartLearning + " " +
-                    userInputs.InProgress + " " +
-                    userInputs.FinishedLearning
+                    "ID: " + userInputs.Id + " " +
+                    "Title: " + userInputs.TheTitle + " " +
+                    "Description: " + userInputs.TheDescription + " " +
+                    "Used Time: " + userInputs.TheUsedTime + "h" + " " +
+                    "Used Source: " + userInputs.TheSource + " " +
+                    "Started learning: " + userInputs.StartLearning + " " +
+                    "Are you still learning?: " + userInputs.InProgress + " " +
+                    "You finished learning: " + userInputs.FinishedLearning
                     );
 
                     string[] inputsToArray = inputsList.ToArray();
