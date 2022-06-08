@@ -58,9 +58,9 @@ namespace LearningDiary
                     "Description: " + userInputs.TheDescription + " " +
                     "Used Time: " + userInputs.TheUsedTime + "h" + " " +
                     "Used Source: " + userInputs.TheSource + " " +
-                    "Started learning: " + userInputs.StartLearning + " " +
+                    "Started learning: " + userInputs.StartLearning.ToShortDateString() + " " +
                     "Are you still learning?: " + userInputs.InProgress + " " +
-                    "You finished learning: " + userInputs.FinishedLearning
+                    "You finished learning: " + userInputs.FinishedLearning.ToShortDateString()
                     );
 
                     string[] inputsToArray = inputsList.ToArray();
