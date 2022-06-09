@@ -86,7 +86,16 @@ namespace LearningDiary
             if (isGoing.ToLower() == "yes")
             {
                 userInputs.InProgress = true;
-
+                inputsList.Add(
+                "ID: " + userInputs.Id + "\n" +
+                "Title: " + userInputs.TheTitle + " \n" +
+                "Description: " + userInputs.TheDescription + " \n" +
+                "Used Time: " + userInputs.TheUsedTime + "h" + " \n" +
+                "Used Source: " + userInputs.TheSource + "\n" +
+                "Started learning: " + userInputs.StartLearning.ToShortDateString() + "\n" +
+                "Are you still learning?: " + userInputs.InProgress + "\n"
+                //"You finished learning: " + userInputs.FinishedLearning.ToShortDateString()
+                );
             }
 
             else if (isGoing.ToLower() == "no")
@@ -95,20 +104,17 @@ namespace LearningDiary
 
                 Console.WriteLine("Write the date you stop learning", "dd,mm,yyyy: ");
                 userInputs.FinishedLearning = Convert.ToDateTime(Console.ReadLine());
-
-            }
-
-            //Lisää käyttäjän inputit listaan
-            inputsList.Add(
-                "ID: " + userInputs.Id + " " +
-                "Title: " + userInputs.TheTitle + " " +
-                "Description: " + userInputs.TheDescription + " " +
-                "Used Time: " + userInputs.TheUsedTime + "h" + " " +
-                "Used Source: " + userInputs.TheSource + " " +
-                "Started learning: " + userInputs.StartLearning.ToShortDateString() + " " +
-                "Are you still learning?: " + userInputs.InProgress + " " +
+                inputsList.Add(
+                "ID: " + userInputs.Id + "\n" +
+                "Title: " + userInputs.TheTitle + " \n" +
+                "Description: " + userInputs.TheDescription + " \n" +
+                "Used Time: " + userInputs.TheUsedTime + "h" + " \n" +
+                "Used Source: " + userInputs.TheSource + "\n" +
+                "Started learning: " + userInputs.StartLearning.ToShortDateString() + "\n" +
+                "Are you still learning?: " + userInputs.InProgress + "\n" +
                 "You finished learning: " + userInputs.FinishedLearning.ToShortDateString()
                 );
+            }
 
             string[] inputsToArray = inputsList.ToArray();
             foreach (var item in inputsToArray)
