@@ -70,6 +70,9 @@ namespace LearningDiary
             userInputs.TheDescription = Console.ReadLine();
 
             Console.WriteLine("How much time do you think you gonna spend: ");
+            userInputs.EstimatedTimeToMaster = double.Parse(Console.ReadLine());
+
+            Console.WriteLine("How much time you have used so far?: ");
             userInputs.TheUsedTime = double.Parse(Console.ReadLine());
 
             Console.WriteLine("What source do you use: ");
@@ -89,12 +92,12 @@ namespace LearningDiary
                 inputsList.Add(
                 "ID: " + userInputs.Id + "\n" +
                 "Title: " + userInputs.TheTitle + " \n" +
-                "Description: " + userInputs.TheDescription + " \n" +
+                "Description: " + userInputs.TheDescription + " \n" + 
+                "Estimated Time To Master: " + userInputs.EstimatedTimeToMaster.ToString("HH:mm:ss") + "\n" +
                 "Used Time: " + userInputs.TheUsedTime + "h" + " \n" +
                 "Used Source: " + userInputs.TheSource + "\n" +
                 "Started learning: " + userInputs.StartLearning.ToShortDateString() + "\n" +
                 "Are you still learning?: " + userInputs.InProgress + "\n"
-                //"You finished learning: " + userInputs.FinishedLearning.ToShortDateString()
                 );
             }
 
@@ -123,7 +126,6 @@ namespace LearningDiary
             }
 
             //Tiedostoon lisääminen
-
             if (File.Exists(path))
             {
                 File.AppendAllText(path, string.Join(Environment.NewLine, inputsToArray));
@@ -163,6 +165,7 @@ namespace LearningDiary
         public int Id { get; set; }
         public string TheTitle { get; set; }
         public string TheDescription { get; set; }
+        public double EstimatedTimeToMaster { get; set; }
         public double TheUsedTime { get; set; }
         public string TheSource { get; set; }
         public bool InProgress { get; set; }

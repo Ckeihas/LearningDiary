@@ -36,4 +36,11 @@ Used Time: 2h
 Used Source: f
 Started learning: 1.1.2022
 Are you still learning?: False
-You finished learning: 5.5.2022
+You finished learning: 5.5.2022ID: 99
+Title: Koodaaminen 
+Description: Opettele koodaamaan 
+Estimated Time To Master: HH:mm:ss
+Used Time: 156h 
+Used Source: Google, Youtube jne
+Started learning: 1.1.2021
+Are you still learning?: True
