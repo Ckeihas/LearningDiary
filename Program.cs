@@ -8,22 +8,57 @@ namespace LearningDiary
     {
         static void Main(string[] args)
         {
-            
-            var inputsList = new List<string>();
-            UserInputs userInputs = new UserInputs();
-            string path = @"C:\Users\ChristianKeihäs\source\repos\LearningDiary\Topics.txt";
-
-            //Console.WriteLine("Do you want to see all the topics? Type yes or no: ");
-            //string topicQ = Console.ReadLine();
-
-            //if(topicQ.ToLower() == "yes")
-            //{
-
-            //}
+     
             Console.WriteLine("Would you like to see all the topics? Type yes or no: ");
             string topicAnswer = Console.ReadLine();
 
             TopicQuestion(topicAnswer);
+
+            HandlingUserInputs();
+
+        }
+
+
+
+        static void ShowTopics()
+        {
+            string[] topics = {
+                "ID", 
+                "Title", 
+                "Description",
+                "Estimated time to master", 
+                "Time Spend", "Source", 
+                "Start Learning Date",
+                "In progress",
+                "Completion Date"
+            };
+
+            foreach (var item in topics)
+            {
+                Console.WriteLine(item);
+            }
+        }
+
+
+
+
+        static void TopicQuestion(string answer)
+        {
+
+            if (answer.ToLower() == "yes")
+            {
+                ShowTopics();
+                Console.WriteLine(" ");
+            }
+            
+        }
+
+
+        static void HandlingUserInputs() 
+        {
+            string path = @"C:\Users\ChristianKeihäs\source\repos\LearningDiary\Topics.txt";
+            var inputsList = new List<string>();
+            UserInputs userInputs = new UserInputs();
 
             Console.WriteLine("Write ID: ");
             userInputs.Id = int.Parse(Console.ReadLine());
@@ -81,8 +116,6 @@ namespace LearningDiary
                 Console.WriteLine(item);
             }
 
-
-
             //Tiedostoon lisääminen
 
             if (File.Exists(path))
@@ -112,40 +145,6 @@ namespace LearningDiary
                 Console.WriteLine("Tiedostoa ei löydy");
             }
                 */
-            }
-
-        }
-
-        static void ShowTopics()
-        {
-            string[] topics = {
-                "ID", 
-                "Title", 
-                "Description",
-                "Estimated time to master", 
-                "Time Spend", "Source", 
-                "Start Learning Date",
-                "In progress",
-                "Completion Date"
-            };
-
-            foreach (var item in topics)
-            {
-                Console.WriteLine(item);
-            }
-        }
-
-
-        static void TopicQuestion(string answer)
-        {
-
-            if (answer.ToLower() == "yes")
-            {
-                ShowTopics();
-            }
-            else
-            {
-                
             }
         }
     }
