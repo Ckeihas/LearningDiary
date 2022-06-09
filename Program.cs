@@ -8,7 +8,7 @@ namespace LearningDiary
     {
         static void Main(string[] args)
         {
-
+            
             var inputsList = new List<string>();
             UserInputs userInputs = new UserInputs();
             string path = @"C:\Users\ChristianKeihäs\source\repos\LearningDiary\Topics.txt";
@@ -20,6 +20,10 @@ namespace LearningDiary
             //{
 
             //}
+            Console.WriteLine("Would you like to see all the topics? Type yes or no: ");
+            string topicAnswer = Console.ReadLine();
+
+            TopicQuestion(topicAnswer);
 
             Console.WriteLine("Write ID: ");
             userInputs.Id = int.Parse(Console.ReadLine());
@@ -109,23 +113,61 @@ namespace LearningDiary
             }
                 */
             }
-        }
-        class UserInputs
-        {
-            public int Id { get; set; }
-            public string TheTitle { get; set; }
-            public string TheDescription { get; set; }
-            public double TheUsedTime { get; set; }
-            public string TheSource { get; set; }
-            public bool InProgress { get; set; }
-            public DateTime StartLearning { get; set; }
-            public DateTime FinishedLearning { get; set; }
 
         }
 
-        class Topic
+        static void ShowTopics()
         {
-            public string Topics { get; set; }
+            string[] topics = {
+                "ID", 
+                "Title", 
+                "Description",
+                "Estimated time to master", 
+                "Time Spend", "Source", 
+                "Start Learning Date",
+                "In progress",
+                "Completion Date"
+            };
+
+            foreach (var item in topics)
+            {
+                Console.WriteLine(item);
+            }
         }
+
+
+        static void TopicQuestion(string answer)
+        {
+
+            if (answer.ToLower() == "yes")
+            {
+                ShowTopics();
+            }
+            else
+            {
+                
+            }
+        }
+    }
+
+
+
+
+    class UserInputs
+    {
+        public int Id { get; set; }
+        public string TheTitle { get; set; }
+        public string TheDescription { get; set; }
+        public double TheUsedTime { get; set; }
+        public string TheSource { get; set; }
+        public bool InProgress { get; set; }
+        public DateTime StartLearning { get; set; }
+        public DateTime FinishedLearning { get; set; }
+
+    }
+
+    class Topic
+    {
+        public string Topics { get; set; }
     }
 }
