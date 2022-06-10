@@ -1,46 +1,47 @@
-System.Collections.Generic.List`1[System.String]
-System.String[]
-ID: 77 Title: Joulu Description: Mitä lahjoja ostat? Used Time: 2h Used Source: nettikaupat Started learning: 1.12.2022 Are you still learning?: False You finished learning: 23.12.2022ID: 77	 Title: hedelmäsalaatti	 Description: Mitä hedelmäsalaattiin kuuluu?	 Used Time: 2h	 Used Source: google Started learning: 5.7.2022	 Are you still learning?: False	 You finished learning: 7.8.2022ID: 88 Title: Lentäminen Description: Pelkäätkö lentämistä? Used Time: 1h Used Source: google Started learning: 1.1.2022 Are you still learning?: True You finished learning: 1.1.0001ID: 88 Title: Jäätelö Description: Mistä jäätelö tehdään? Used Time: 1h Used Source: Google Started learning: 9.6.2022 Are you still learning?: True You finished learning: 1.1.0001ID: 99 Title: Kesäloma Description: Mitä kesälomalla voi tehdä? Used Time: 222h Used Source: Ihmisiä Started learning: 5.7.2022 Are you still learning?: False You finished learning: 14.9.2022ID: 7 Title: kk Description: ll Used Time: 9h Used Source: google Started learning: 6.8.2022 Are you still learning?: True You finished learning: 1.1.0001ID: 9
-Title: uuu 
-Description: ööö 
-Used Time: 6h 
-Used Source: google
- Started learning: 5.9.2022
- Are you still learning?: True
- You finished learning: 1.1.0001ID: 3
-Title: Tori 
-Description: Mitä torilla myydään 
+ID: 1
+Title: Autot 
+Description: Mitä eroja autoissa on? 
+Estimated Time To Master: 3
+Used Time: 2h 
+Used Source: Google
+Started learning: 2.3.2022
+Are you still learning?: True
+
+ID: 2
+Title: Kalastus 
+Description: Mitä kalastamiseen vaaditaan? 
 Used Time: 2h 
 Used Source: google
 Started learning: 4.8.2022
-Are you still learning?: True
-29.7.2022
-ID: 11
-Title: Myyminen 
-Description: Miten myydään? 
-Used Time: 2h 
-Used Source: Google ja ihmiset
-Started learning: 4.7.2022
 Are you still learning?: False
-ID: 4
-Title: r 
-Description: t 
+You finished learning: 4.9.2022ID: 3
+Title: Sijoittaminen 
+Description: MIten aloittaa sijoittaminen? 
 Used Time: 3h 
-Used Source: g
-Started learning: 2.2.2022
-Are you still learning?: True
-ID: 1
-Title: w 
-Description: q 
-Used Time: 2h 
-Used Source: f
-Started learning: 1.1.2022
+Used Source: Google ja kirjat
+Started learning: 3.9.2022
 Are you still learning?: False
-You finished learning: 5.5.2022ID: 99
-Title: Koodaaminen 
-Description: Opettele koodaamaan 
-Estimated Time To Master: HH:mm:ss
-Used Time: 156h 
-Used Source: Google, Youtube jne
-Started learning: 1.1.2021
+You finished learning: 3.3.2022ID: 4
+Title: Puhelimen käyttöönotto 
+Description: Miten ottaa uusi puhelin käyttöön? 
+Used Time: 1h 
+Used Source: Ohjekirja
+Started learning: 1.8.2022
+Are you still learning?: False
+You finished learning: 1.8.2022ID: 5
+Title: Ratsastus 
+Description: Miten aloittaa ratsastus 
+Estimated Time To Master: 3
+Used Time: 0h 
+Used Source: Asiasta tietävät
+Started learning: 2.9.2022
+Are you still learning?: True
+
+ID: 6
+Title: Kitaran soitto 
+Description: Miten opetella soittamaan kitaraa 
+Estimated Time To Master: 4
+Used Time: 1h 
+Used Source: Youtube
+Started learning: 23.4.2022
 Are you still learning?: True
