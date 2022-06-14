@@ -45,3 +45,86 @@ Used Time: 1h
 Used Source: Youtube
 Started learning: 23.4.2022
 Are you still learning?: True
+ID: 7
+Title: Jousiammunta 
+Description: Opettele jousiammuntaa 
+Estimated Time To Master: 2
+Used Time: 0h 
+Used Source: Google
+Started learning: 8.9.2022
+Are you still learning?: True
+learningWeek1.UserInputsID: 3
+Title: Testi2 
+Description: Harjoittelua2 
+Estimated Time To Master: 300000
+Used Time: 100h 
+Used Source: google
+Started learning: 2.8.2022
+Are you still learning?: True
+
+ID: 5
+Title: testi3 
+Description: Harjoittelua3 
+Estimated Time To Master: 9000
+Used Time: 200h 
+Used Source: youtube
+Started learning: 4.1.2022
+Are you still learning?: True
+ID: 2
+Title: Golf
+Description: Miten golffata?
+Estimated time to master: 29
+Used time so far: 20
+Sources: Youtube
+Are you still learning: False
+You started learning: 2.4.2022 0.00.00
+You finished learning: 6.6.2022 0.00.00
+
+ID: 2
+Title: Golf
+Description: Miten golffata?
+Estimated time to master: 29
+Used time so far: 20
+Sources: Youtube
+Are you still learning: False
+You started learning: 2.4.2022 0.00.00
+You finished learning: 6.6.2022 0.00.00
+ID: 3
+Title: Koodaaminen
+Description: Opettele koodaamaan
+Estimated time to master: 20000
+Used time so far: 1000
+Sources: Koko netti
+Are you still learning: True
+You started learning: 1.1.2022
+You finished learning: 1.1.0001
+
+ID: 3
+Title: Koodaaminen
+Description: Opettele koodaamaan
+Estimated time to master: 20000
+Used time so far: 1000
+Sources: Koko netti
+Are you still learning: True
+You started learning: 1.1.2022
+You finished learning: 1.1.0001
+
+ID: 4
+Title: Juoksu
+Description: Opettele juoksemaan
+Estimated time to master: 5
+Used time so far: 1
+Sources: Youtube
+Are you still learning: False
+You started learning: 1.8.2022
+You finished learning: 7.9.2022
+
+ID: 4
+Title: Juoksu
+Description: Opettele juoksemaan
+Estimated time to master: 5
+Used time so far: 1
+Sources: Youtube
+Are you still learning: False
+You started learning: 1.8.2022
+You finished learning: 7.9.2022

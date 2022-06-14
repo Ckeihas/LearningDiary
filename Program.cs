@@ -9,11 +9,6 @@ namespace LearningDiary
         static void Main(string[] args)
         {
 
-            //Console.WriteLine("Would you like to see all the topics? Type yes or no: ");
-            //string topicAnswer = Console.ReadLine();
-
-            //TopicQuestion(topicAnswer);
-         
             ExposeTheTextFile();
             Console.WriteLine(" ");
             HandlingUserInputs();
@@ -22,128 +17,92 @@ namespace LearningDiary
 
 
 
-        static void ShowTopics()
-        {
-            string[] topics = {
-                "ID", 
-                "Title", 
-                "Description",
-                "Estimated time to master", 
-                "Time Spend", "Source", 
-                "Start Learning Date",
-                "In progress",
-                "Completion Date"
-            };
-
-            foreach (var item in topics)
-            {
-                Console.WriteLine(item);
-            }
-        }
-
-
-
-
-        static void TopicQuestion(string answer)
-        {
-
-            if (answer.ToLower() == "yes")
-            {
-                ShowTopics();
-                Console.WriteLine(" ");
-            }
-            
-        }
-
-
         static void HandlingUserInputs() 
         {
             string path = @"C:\Users\ChristianKeihäs\source\repos\LearningDiary\Topics.txt";
-            var inputsList = new List<string>();
-            UserInputs userInputs = new UserInputs();
+            List<Topics> inputsList = new List<Topics>();
+            
             bool newTopic = true;
 
+
             do {
+                Topics topics = new Topics();
+
+                Console.WriteLine("Do you want to search Topic you receantly added?: Type yes or no");
+                string showTopics = Console.ReadLine();
+
+                if (showTopics.ToLower() == "yes")
+                {
+                    Console.WriteLine("Type ID number: ");
+                    int idNumber = int.Parse(Console.ReadLine());
+
+                    Topics t = inputsList.Find(x => x.Id == idNumber);
+                    Console.WriteLine(t);
+                }
                 
                 Console.WriteLine("Write ID: ");
-                userInputs.Id = int.Parse(Console.ReadLine());
+                topics.Id = int.Parse(Console.ReadLine());
 
                 Console.WriteLine(" ");
 
                 Console.WriteLine("Write the title: ");
-                userInputs.TheTitle = Console.ReadLine();
+                topics.TheTitle = Console.ReadLine();
 
                 Console.WriteLine(" ");
 
                 Console.WriteLine("Write the description: ");
-                userInputs.TheDescription = Console.ReadLine();
+                topics.TheDescription = Console.ReadLine();
 
                 Console.WriteLine(" ");
 
                 Console.WriteLine("How much time do you think you gonna spend: ");
-                userInputs.EstimatedTimeToMaster = double.Parse(Console.ReadLine());
+                topics.EstimatedTimeToMaster = double.Parse(Console.ReadLine());
 
                 Console.WriteLine(" ");
 
                 Console.WriteLine("How much time you have used so far?: ");
-                userInputs.TheUsedTime = double.Parse(Console.ReadLine());
+                topics.TheUsedTime = double.Parse(Console.ReadLine());
 
                 Console.WriteLine(" ");
 
                 Console.WriteLine("What source do you use: ");
-                userInputs.TheSource = Console.ReadLine();
+                topics.TheSource = Console.ReadLine();
 
                 Console.WriteLine(" ");
 
                 Console.WriteLine("Write the date you started learning: dd/mm/yyyy");
-                userInputs.StartLearning = Convert.ToDateTime(Console.ReadLine());
+                topics.StartLearning = Convert.ToDateTime(Console.ReadLine());
 
                 Console.WriteLine(" ");
 
                 Console.WriteLine("Is your learning progress still going? Type yes or no: ");
                 string isGoing = Console.ReadLine();
 
+                inputsList.Add(topics);
+
                 Console.WriteLine(" ");
 
                 //Tsekkaa onko vastaus learning progressiin yes vai no
                 if (isGoing.ToLower() == "yes")
                 {
-                    userInputs.InProgress = true;
-                    inputsList.Add(
-                    "ID: " + userInputs.Id + "\n" +
-                    "Title: " + userInputs.TheTitle + " \n" +
-                    "Description: " + userInputs.TheDescription + " \n" +
-                    "Estimated Time To Master: " + userInputs.EstimatedTimeToMaster + "\n" +
-                    "Used Time: " + userInputs.TheUsedTime + "h" + " \n" +
-                    "Used Source: " + userInputs.TheSource + "\n" +
-                    "Started learning: " + userInputs.StartLearning.ToShortDateString() + "\n" +
-                    "Are you still learning?: " + userInputs.InProgress + "\n"
-                    );
+                    topics.InProgress = true;
+                    inputsList.Add(topics);
                 }
 
                 else if (isGoing.ToLower() == "no")
                 {
-                    userInputs.InProgress = false;
+                    topics.InProgress = false;
 
                     Console.WriteLine("Write the date you stop learning", "dd,mm,yyyy: ");
-                    userInputs.FinishedLearning = Convert.ToDateTime(Console.ReadLine());
+                    topics.FinishedLearning = Convert.ToDateTime(Console.ReadLine());
                     Console.WriteLine(" ");
-                    inputsList.Add(
-                    "ID: " + userInputs.Id + "\n" +
-                    "Title: " + userInputs.TheTitle + " \n" +
-                    "Description: " + userInputs.TheDescription + " \n" +
-                    "Used Time: " + userInputs.TheUsedTime + "h" + " \n" +
-                    "Used Source: " + userInputs.TheSource + "\n" +
-                    "Started learning: " + userInputs.StartLearning.ToShortDateString() + "\n" +
-                    "Are you still learning?: " + userInputs.InProgress + "\n" +
-                    "You finished learning: " + userInputs.FinishedLearning.ToShortDateString()
-                    );
+                    inputsList.Add(topics);
                 }
 
                 Console.WriteLine("Do you want to add another topic? Type yes or no: ");
                 string anotherTopic = Console.ReadLine();
 
-                
+
                 if (anotherTopic.ToLower() == "yes")
                 {
                     Console.Clear();
@@ -157,18 +116,18 @@ namespace LearningDiary
             }
             while (newTopic);
 
-            string[] inputsToArray = inputsList.ToArray();
-            Console.WriteLine("You added " + inputsToArray.Length + " new topics");
-
-            foreach (var item in inputsToArray)
-            {
-                Console.WriteLine(item);
-            }
+            
+            Console.WriteLine("You added " + inputsList.Count + " new topics");
+            Console.WriteLine(" ");
+            //foreach (Topics item in inputsList)
+            //{
+            //    Console.WriteLine(item);
+            //}
 
             //Tiedostoon lisääminen
             if (File.Exists(path))
             {
-                File.AppendAllText(path, string.Join(Environment.NewLine, inputsToArray));
+                File.AppendAllText(path, string.Join(Environment.NewLine, inputsList));
                 
             }
         }
@@ -207,9 +166,7 @@ namespace LearningDiary
     }
 
 
-
-
-    class UserInputs
+    class Topics
     {
         public int Id { get; set; }
         public string TheTitle { get; set; }
@@ -221,10 +178,22 @@ namespace LearningDiary
         public DateTime StartLearning { get; set; }
         public DateTime FinishedLearning { get; set; }
 
-    }
+        public override string ToString()
+        {
+            string overriding = "";
 
-    class Topic
-    {
-        public string Topics { get; set; }
+            overriding += "ID: " + Id + "\n";
+            overriding += "Title: " + TheTitle + "\n";
+            overriding += "Description: " + TheDescription + "\n";
+            overriding += "Estimated time to master: " + EstimatedTimeToMaster + "\n";
+            overriding += "Used time so far: " + TheUsedTime + "\n";
+            overriding += "Sources: " + TheSource + "\n";
+            overriding += "Are you still learning: " + InProgress + "\n";
+            overriding += "You started learning: " + StartLearning.ToShortDateString() + "\n";
+            overriding += "You finished learning: " + FinishedLearning.ToShortDateString() + "\n";
+
+
+            return overriding;
+        }
     }
 }
