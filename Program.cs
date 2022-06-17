@@ -115,12 +115,14 @@ namespace LearningDiary
                 int idNumber = int.Parse(Console.ReadLine());
 
                 Topics t = inputsList.Find(x => x.Id == idNumber);
-                Console.WriteLine(t.TheTitle);
+                Console.WriteLine(t);
 
-                Console.WriteLine("Select topic you want to edit and press the number of topic: ");
-                int typedNum = int.Parse(Console.ReadLine());
+                Console.WriteLine("Do you want to edit this topic? Type yes or type e for exit: ");
+                string editAnswer = Console.ReadLine();
 
-                Console.WriteLine(
+                if(editAnswer.ToLower() == "yes")
+                {
+                    Console.WriteLine(
                     "1) ID "
                     + "\n" +
                     "2) Title"
@@ -138,17 +140,20 @@ namespace LearningDiary
                     "8) Day you finished"
                     );
 
-                if (typedNum == 2)
-                {
-                    Console.WriteLine("Write new Title: ");
-                    string newTitle = Console.ReadLine();
+                    Console.WriteLine("Select topic you want to edit and type the number of topic: ");
+                    int typedNum = int.Parse(Console.ReadLine());
 
-                    var testi = inputsList.Select(x => x.TheTitle = newTitle);
-                    foreach (var item in testi)
+                    if (typedNum == 2)
                     {
-                        Console.WriteLine(item);
+                        Console.WriteLine("Write new Title: ");
+                        string newTitle = Console.ReadLine();
+
+                        t.TheTitle = newTitle;
+
+                        Console.WriteLine("Your new title is: " + t.TheTitle);
                     }
                 }
+               
             }
 
             else
@@ -157,7 +162,7 @@ namespace LearningDiary
                 Console.WriteLine(" ");
                 foreach (Topics item in inputsList)
                 {
-                    Console.WriteLine(item);
+                    Console.WriteLine("Your new title is: " + item);
                 }
             }
 
