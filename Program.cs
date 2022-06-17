@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace LearningDiary
 {
@@ -27,18 +28,6 @@ namespace LearningDiary
 
             do {
                 Topics topics = new Topics();
-
-                Console.WriteLine("Do you want to search Topic you receantly added?: Type yes or no");
-                string showTopics = Console.ReadLine();
-
-                if (showTopics.ToLower() == "yes")
-                {
-                    Console.WriteLine("Type ID number: ");
-                    int idNumber = int.Parse(Console.ReadLine());
-
-                    Topics t = inputsList.Find(x => x.Id == idNumber);
-                    Console.WriteLine(t);
-                }
                 
                 Console.WriteLine("Write ID: ");
                 topics.Id = int.Parse(Console.ReadLine());
@@ -78,7 +67,6 @@ namespace LearningDiary
                 Console.WriteLine("Is your learning progress still going? Type yes or no: ");
                 string isGoing = Console.ReadLine();
 
-                inputsList.Add(topics);
 
                 Console.WriteLine(" ");
 
@@ -86,7 +74,7 @@ namespace LearningDiary
                 if (isGoing.ToLower() == "yes")
                 {
                     topics.InProgress = true;
-                    inputsList.Add(topics);
+                    
                 }
 
                 else if (isGoing.ToLower() == "no")
@@ -96,8 +84,10 @@ namespace LearningDiary
                     Console.WriteLine("Write the date you stop learning", "dd,mm,yyyy: ");
                     topics.FinishedLearning = Convert.ToDateTime(Console.ReadLine());
                     Console.WriteLine(" ");
-                    inputsList.Add(topics);
+                    
                 }
+
+                inputsList.Add(topics);
 
                 Console.WriteLine("Do you want to add another topic? Type yes or no: ");
                 string anotherTopic = Console.ReadLine();
@@ -116,19 +106,66 @@ namespace LearningDiary
             }
             while (newTopic);
 
-            
-            Console.WriteLine("You added " + inputsList.Count + " new topics");
-            Console.WriteLine(" ");
-            //foreach (Topics item in inputsList)
-            //{
-            //    Console.WriteLine(item);
-            //}
+            Console.WriteLine("Do you want to search Topic you receantly added?: Type yes or no");
+            string showTopics = Console.ReadLine();
+
+            if (showTopics.ToLower() == "yes")
+            {
+                Console.WriteLine("Type ID number: ");
+                int idNumber = int.Parse(Console.ReadLine());
+
+                Topics t = inputsList.Find(x => x.Id == idNumber);
+                Console.WriteLine(t.TheTitle);
+
+                Console.WriteLine("Select topic you want to edit and press the number of topic: ");
+                int typedNum = int.Parse(Console.ReadLine());
+
+                Console.WriteLine(
+                    "1) ID "
+                    + "\n" +
+                    "2) Title"
+                    + "\n" +
+                    "3) Description"
+                    + "\n" +
+                    "4) Estimated time to master"
+                    + "\n" +
+                    "5) Used time"
+                    + "\n" +
+                    "6) Source"
+                    + "\n" +
+                    "7) Day you started"
+                    + "\n" +
+                    "8) Day you finished"
+                    );
+
+                if (typedNum == 2)
+                {
+                    Console.WriteLine("Write new Title: ");
+                    string newTitle = Console.ReadLine();
+
+                    var testi = inputsList.Select(x => x.TheTitle = newTitle);
+                    foreach (var item in testi)
+                    {
+                        Console.WriteLine(item);
+                    }
+                }
+            }
+
+            else
+            {
+                Console.WriteLine("You added " + inputsList.Count + " new topics");
+                Console.WriteLine(" ");
+                foreach (Topics item in inputsList)
+                {
+                    Console.WriteLine(item);
+                }
+            }
+
 
             //Tiedostoon lisääminen
             if (File.Exists(path))
             {
                 File.AppendAllText(path, string.Join(Environment.NewLine, inputsList));
-                
             }
         }
 
@@ -194,6 +231,35 @@ namespace LearningDiary
 
 
             return overriding;
+        }
+
+        public static void Edit()
+        {
+            Console.WriteLine("Select topic you want to edit and press the number of topic: ");
+            int typedNum = int.Parse(Console.ReadLine());
+
+            Console.WriteLine(
+                "1) ID " 
+                + "\n" +
+                "2) Title"
+                + "\n" +
+                "3) Description"
+                + "\n" +
+                "4) Estimated time to master"
+                + "\n" +
+                "5) Used time"
+                + "\n" +
+                "6) Source"
+                + "\n" +
+                "7) Day you started"
+                + "\n" +
+                "8) Day you finished"
+                );
+
+            if(typedNum == 1)
+            {
+                
+            }
         }
     }
 }

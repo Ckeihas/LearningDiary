@@ -128,3 +128,164 @@ Sources: Youtube
 Are you still learning: False
 You started learning: 1.8.2022
 You finished learning: 7.9.2022
+ID: 29
+Title: Testaus
+Description: En opi koodaamaan
+Estimated time to master: 200000
+Used time so far: 1000
+Sources: Kaikkea
+Are you still learning: True
+You started learning: 1.1.1299
+You finished learning: 1.1.0001
+
+ID: 29
+Title: Testaus
+Description: En opi koodaamaan
+Estimated time to master: 200000
+Used time so far: 1000
+Sources: Kaikkea
+Are you still learning: True
+You started learning: 1.1.1299
+You finished learning: 1.1.0001
+ID: 49
+Title: sadasmiljoonas testi
+Description: ei riitä sadasmiljoonas edes
+Estimated time to master: 3000000
+Used time so far: 2000
+Sources: google ja youtube
+Are you still learning: False
+You started learning: 2.1.1899
+You finished learning: 4.3.2022
+
+ID: 49
+Title: sadasmiljoonas testi
+Description: ei riitä sadasmiljoonas edes
+Estimated time to master: 3000000
+Used time so far: 2000
+Sources: google ja youtube
+Are you still learning: False
+You started learning: 2.1.1899
+You finished learning: 4.3.2022
+ID: 24
+Title: kolmasssadasmiljoonas
+Description: jään luokalle
+Estimated time to master: 300000
+Used time so far: 200
+Sources: kaikkea
+Are you still learning: True
+You started learning: 3.2.3033
+You finished learning: 1.1.0001
+
+ID: 24
+Title: kolmasssadasmiljoonas
+Description: jään luokalle
+Estimated time to master: 300000
+Used time so far: 200
+Sources: kaikkea
+Are you still learning: True
+You started learning: 3.2.3033
+You finished learning: 1.1.0001
+ID: 700
+Title: mitentäpitäisi toimia
+Description: en vaan ymmärrä
+Estimated time to master: 20000
+Used time so far: 200
+Sources: google
+Are you still learning: True
+You started learning: 3.5.2022
+You finished learning: 1.1.0001
+
+ID: 700
+Title: mitentäpitäisi toimia
+Description: en vaan ymmärrä
+Estimated time to master: 20000
+Used time so far: 200
+Sources: google
+Are you still learning: True
+You started learning: 3.5.2022
+You finished learning: 1.1.0001
+ID: 32
+Title: Testi tähän asti
+Description: Miten toimii tällä hetkellä
+Estimated time to master: 200
+Used time so far: 100
+Sources: google ja youtube
+Are you still learning: False
+You started learning: 17.6.2022
+You finished learning: 17.6.2022
+
+ID: 32
+Title: Testi tähän asti
+Description: Miten toimii tällä hetkellä
+Estimated time to master: 200
+Used time so far: 100
+Sources: google ja youtube
+Are you still learning: False
+You started learning: 17.6.2022
+You finished learning: 17.6.2022
+
+ID: 45
+Title: Testi2
+Description: Testataan miten toimii tällä hetkellä
+Estimated time to master: 200
+Used time so far: 100
+Sources: google
+Are you still learning: True
+You started learning: 17.9.2021
+You finished learning: 1.1.0001
+
+ID: 45
+Title: Testi2
+Description: Testataan miten toimii tällä hetkellä
+Estimated time to master: 200
+Used time so far: 100
+Sources: google
+Are you still learning: True
+You started learning: 17.9.2021
+You finished learning: 1.1.0001
+ID: 7
+Title: testi3
+Description: Testataan
+Estimated time to master: 4
+Used time so far: 3
+Sources: google
+Are you still learning: False
+You started learning: 1.1.2022
+You finished learning: 7.8.2022
+ID: 1
+Title: eee
+Description: rrrr
+Estimated time to master: 4
+Used time so far: 3
+Sources: ggggg
+Are you still learning: True
+You started learning: 2.2.2022
+You finished learning: 1.1.0001
+
+ID: 2
+Title: ttt
+Description: yyy
+Estimated time to master: 1
+Used time so far: 0
+Sources: yoyoyo
+Are you still learning: True
+You started learning: 4.5.2022
+You finished learning: 1.1.0001
+ID: 2
+Title: testi1
+Description: katotaan toimiiko
+Estimated time to master: 3
+Used time so far: 2
+Sources: google
+Are you still learning: True
+You started learning: 2.1.2022
+You finished learning: 1.1.0001
+ID: 2
+Title: Testi
+Description: tt
+Estimated time to master: 4
+Used time so far: 2
+Sources: gggg
+Are you still learning: True
+You started learning: 2.2.2022
+You finished learning: 1.1.0001
