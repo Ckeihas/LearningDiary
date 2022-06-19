@@ -117,8 +117,10 @@ namespace LearningDiary
                 Topics t = inputsList.Find(x => x.Id == idNumber);
                 Console.WriteLine(t);
 
-                Console.WriteLine("Do you want to edit this topic? Type yes or type e for exit: ");
+                Console.WriteLine("Do you want to edit this topics fields? Type yes or type e for exit: ");
                 string editAnswer = Console.ReadLine();
+
+                Console.WriteLine(" ");
 
                 if(editAnswer.ToLower() == "yes")
                 {
@@ -140,7 +142,10 @@ namespace LearningDiary
                     "8) Day you finished"
                     );
 
-                    Console.WriteLine("Select topic you want to edit and type the number of topic: ");
+
+
+                    //Aiheen muokkaaminen
+                    Console.WriteLine("Select a number you want to edit and type the number: ");
                     int typedNum = int.Parse(Console.ReadLine());
 
                     if (typedNum == 2)
@@ -149,8 +154,68 @@ namespace LearningDiary
                         string newTitle = Console.ReadLine();
 
                         t.TheTitle = newTitle;
-
+                        Console.WriteLine("CHANGE COMPLETED!");
                         Console.WriteLine("Your new title is: " + t.TheTitle);
+                    }
+
+                    if(typedNum == 3)
+                    {
+                        Console.WriteLine("Write new Description: ");
+                        string newDescription = Console.ReadLine();
+
+                        t.TheDescription = newDescription;
+                        Console.WriteLine("CHANGE COMPLETED!");
+                        Console.WriteLine("Your new description is: " + t.TheDescription);
+                    }
+
+                    if(typedNum == 4)
+                    {
+                        Console.WriteLine("Write new estimated time to master: ");
+                        double newTimeToMaster = double.Parse(Console.ReadLine());
+
+                        t.EstimatedTimeToMaster = newTimeToMaster;
+                        Console.WriteLine("CHANGE COMPLETED!");
+                        Console.WriteLine("Your new estimated time is: " + t.EstimatedTimeToMaster);
+                    }
+
+                    if(typedNum == 5)
+                    {
+                        Console.WriteLine("Write new used time: ");
+                        double newTimeToMaster = double.Parse(Console.ReadLine());
+
+                        t.TheUsedTime = newTimeToMaster;
+                        Console.WriteLine("CHANGE COMPLETED!");
+                        Console.WriteLine("Your new estimated time is: " + t.TheUsedTime);
+                    }
+
+                    if(typedNum == 6)
+                    {
+                        Console.WriteLine("Write new source: ");
+                        string newSource = Console.ReadLine();
+
+                        t.TheSource = newSource;
+                        Console.WriteLine("CHANGE COMPLETED!");
+                        Console.WriteLine("Your new source is: " + t.TheSource);
+                    }
+
+                    if(typedNum == 7)
+                    {
+                        Console.WriteLine("Change the starting date: ");
+                        DateTime newStartingDate = Convert.ToDateTime(Console.ReadLine());
+
+                        t.StartLearning = newStartingDate;
+                        Console.WriteLine("CHANGE COMPLETED!");
+                        Console.WriteLine("Your new starting date is: " + t.StartLearning.ToShortDateString());
+                    }
+
+                    if (typedNum == 8)
+                    {
+                        Console.WriteLine("Change the starting date: ");
+                        DateTime newEndDate = Convert.ToDateTime(Console.ReadLine());
+
+                        t.StartLearning = newEndDate;
+                        Console.WriteLine("CHANGE COMPLETED!");
+                        Console.WriteLine("Your new ending date is: " + t.FinishedLearning.ToShortDateString());
                     }
                 }
                
@@ -162,8 +227,23 @@ namespace LearningDiary
                 Console.WriteLine(" ");
                 foreach (Topics item in inputsList)
                 {
-                    Console.WriteLine("Your new title is: " + item);
+                    Console.WriteLine(item);
                 }
+            }
+
+
+
+            //Lisätyn aiheen poistaminen
+            Console.WriteLine("Delete topic with ID number: yes or no ");
+            string deleteAnswer = Console.ReadLine();
+
+            if(deleteAnswer.ToLower() == "yes")
+            {
+                Console.WriteLine("write id number: ");
+                int deleteNum = int.Parse(Console.ReadLine());
+               
+                inputsList.RemoveAll(x => x.Id == deleteNum);
+                                            
             }
 
 
@@ -260,11 +340,6 @@ namespace LearningDiary
                 + "\n" +
                 "8) Day you finished"
                 );
-
-            if(typedNum == 1)
-            {
-                
-            }
         }
     }
 }

@@ -308,3 +308,30 @@ Sources: google
 Are you still learning: True
 You started learning: 2.3.2022
 You finished learning: 1.1.0001
+ID: 45
+Title: Testi8
+Description: Katsotaan miten toimii
+Estimated time to master: 3
+Used time so far: 2
+Sources: google
+Are you still learning: True
+You started learning: 3.3.2022
+You finished learning: 1.1.0001
+ID: 6
+Title: tt
+Description: rr
+Estimated time to master: 5
+Used time so far: 2
+Sources: gogo
+Are you still learning: True
+You started learning: 4.7.2022
+You finished learning: 1.1.0001
+ID: 1
+Title: testi1
+Description: poiston testaaminen
+Estimated time to master: 3
+Used time so far: 2
+Sources: google
+Are you still learning: True
+You started learning: 4.9.2022
+You finished learning: 1.1.0001
