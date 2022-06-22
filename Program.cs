@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using LearningDiary.Models;
 
 namespace LearningDiary
 {
@@ -10,7 +11,6 @@ namespace LearningDiary
         static void Main(string[] args)
         {
 
-            ExposeTheTextFile();
             Console.WriteLine(" ");
             HandlingUserInputs();
 
@@ -18,328 +18,233 @@ namespace LearningDiary
 
 
 
-        static void HandlingUserInputs() 
+        static void HandlingUserInputs()
         {
-            string path = @"C:\Users\ChristianKeihäs\source\repos\LearningDiary\Topics.txt";
-            List<Topics> inputsList = new List<Topics>();
-            
+
             bool newTopic = true;
 
-
-            do {
-                Topics topics = new Topics();
-                
-                Console.WriteLine("Write ID: ");
-                topics.Id = int.Parse(Console.ReadLine());
-
-                Console.WriteLine(" ");
-
-                Console.WriteLine("Write the title: ");
-                topics.TheTitle = Console.ReadLine();
-
-                Console.WriteLine(" ");
-
-                Console.WriteLine("Write the description: ");
-                topics.TheDescription = Console.ReadLine();
-
-                Console.WriteLine(" ");
-
-                Console.WriteLine("How much time do you think you gonna spend: ");
-                topics.EstimatedTimeToMaster = double.Parse(Console.ReadLine());
-
-                Console.WriteLine(" ");
-
-                Console.WriteLine("How much time you have used so far?: ");
-                topics.TheUsedTime = double.Parse(Console.ReadLine());
-
-                Console.WriteLine(" ");
-
-                Console.WriteLine("What source do you use: ");
-                topics.TheSource = Console.ReadLine();
-
-                Console.WriteLine(" ");
-
-                Console.WriteLine("Write the date you started learning: dd/mm/yyyy");
-                topics.StartLearning = Convert.ToDateTime(Console.ReadLine());
-
-                Console.WriteLine(" ");
-
-                Console.WriteLine("Is your learning progress still going? Type yes or no: ");
-                string isGoing = Console.ReadLine();
-
-
-                Console.WriteLine(" ");
-
-                //Tsekkaa onko vastaus learning progressiin yes vai no
-                if (isGoing.ToLower() == "yes")
-                {
-                    topics.InProgress = true;
-                    
-                }
-
-                else if (isGoing.ToLower() == "no")
-                {
-                    topics.InProgress = false;
-
-                    Console.WriteLine("Write the date you stop learning", "dd,mm,yyyy: ");
-                    topics.FinishedLearning = Convert.ToDateTime(Console.ReadLine());
-                    Console.WriteLine(" ");
-                    
-                }
-
-                inputsList.Add(topics);
-
-                Console.WriteLine("Do you want to add another topic? Type yes or no: ");
-                string anotherTopic = Console.ReadLine();
-
-
-                if (anotherTopic.ToLower() == "yes")
-                {
-                    Console.Clear();
-                    newTopic = true;
-                }
-                else 
-                {
-                    Console.Clear();
-                    newTopic = false;
-                }
-            }
-            while (newTopic);
-
-            Console.WriteLine("Do you want to search Topic you receantly added?: Type yes or no");
-            string showTopics = Console.ReadLine();
-
-            if (showTopics.ToLower() == "yes")
+            using (LearningDiaryContext table = new LearningDiaryContext())
             {
-                Console.WriteLine("Type ID number: ");
-                int idNumber = int.Parse(Console.ReadLine());
+                var topics = table.Topics.Select(x => x);
+                var userInput = new Topic();
 
-                Topics t = inputsList.Find(x => x.Id == idNumber);
-                Console.WriteLine(t);
-
-                Console.WriteLine("Do you want to edit this topics fields? Type yes or type e for exit: ");
-                string editAnswer = Console.ReadLine();
-
+                Console.WriteLine("MAIN MENU");
                 Console.WriteLine(" ");
+                Console.WriteLine("A) Add a new topic \n " +
+                    "B) Search topics with ID \n" +
+                    "C) Edit your topics \n" +
+                    "D) Delete topics");
 
-                if(editAnswer.ToLower() == "yes")
+                Console.WriteLine("Write the letter you wanna go to: ");
+                string mainMenuAnswer = Console.ReadLine();
+
+
+                //Uuden topicin lisääminen
+                if (mainMenuAnswer.ToLower() == "a")
                 {
+                    do
+                    {
+
+                        Console.WriteLine("Write the title: ");
+                        userInput.Title = Console.ReadLine();
+
+                        Console.WriteLine(" ");
+
+                        Console.WriteLine("Write the description: ");
+                        userInput.Description = Console.ReadLine();
+
+                        Console.WriteLine(" ");
+
+                        Console.WriteLine("How much time do you think you gonna spend: ");
+                        userInput.TimeToMaster = int.Parse(Console.ReadLine());
+
+                        Console.WriteLine(" ");
+
+                        Console.WriteLine("How much time you have used so far?: ");
+                        userInput.TimeSpend = int.Parse(Console.ReadLine());
+
+                        Console.WriteLine(" ");
+
+                        Console.WriteLine("What source do you use: ");
+                        userInput.Source = Console.ReadLine();
+
+                        Console.WriteLine(" ");
+
+                        Console.WriteLine("Write the date you started learning: dd/mm/yyyy");
+                        userInput.StartLearningDate = Convert.ToDateTime(Console.ReadLine());
+
+                        Console.WriteLine(" ");
+
+                        Console.WriteLine("Is your learning progress still going? Type yes or no: ");
+                        string isGoing = Console.ReadLine();
+
+
+                        Console.WriteLine(" ");
+
+                        //Tsekkaa onko vastaus learning progressiin yes vai no
+                        if (isGoing.ToLower() == "yes")
+                        {
+                            userInput.InProgress = true;
+
+                        }
+
+                        else if (isGoing.ToLower() == "no")
+                        {
+                            userInput.InProgress = false;
+
+                            Console.WriteLine("Write the date you stop learning", "dd,mm,yyyy: ");
+                            userInput.CompletionDate = Convert.ToDateTime(Console.ReadLine());
+                            Console.WriteLine(" ");
+
+                        }
+
+
+                        //Lisää uusi topic tai poistu
+                        Console.WriteLine("Do you want to add another topic? Type yes or no: ");
+                        string anotherTopic = Console.ReadLine();
+
+
+                        if (anotherTopic.ToLower() == "yes")
+                        {
+                            Console.Clear();
+                            newTopic = true;
+                        }
+                        else
+                        {
+                            Console.Clear();
+                            newTopic = false;
+                        }
+
+                        table.Topics.Add(userInput);
+                        table.SaveChanges();
+                    }
+                    while (newTopic);
+
+                    //Console.WriteLine("You added" + userInput.Count() + "new topics!");
+                }
+
+
+                //Näytä topic haetulla ID numerolla
+                if (mainMenuAnswer.ToLower() == "b")
+                {
+                    Console.WriteLine("Write the ID number: ");
+                    int searchIdNum = int.Parse(Console.ReadLine());
+
+                    var showTopic = table.Topics.Where(x => x.Id == searchIdNum);
+                    foreach (var item in showTopic)
+                    {
+                        Console.WriteLine(item);
+                    }
+                }
+
+
+                //Editoi topicia haetulla id numerolla
+                if (mainMenuAnswer.ToLower() == "c")
+                {
+                    Console.WriteLine("Write topics ID number what you want to edit: ");
+                    int editAnswer = int.Parse(Console.ReadLine());
+
+                    var editTopic = table.Topics.Where(x => x.Id == editAnswer);
+
+
+
                     Console.WriteLine(
-                    "1) ID "
-                    + "\n" +
-                    "2) Title"
-                    + "\n" +
-                    "3) Description"
-                    + "\n" +
-                    "4) Estimated time to master"
-                    + "\n" +
-                    "5) Used time"
-                    + "\n" +
-                    "6) Source"
-                    + "\n" +
-                    "7) Day you started"
-                    + "\n" +
-                    "8) Day you finished"
-                    );
+                   "1) Title"
+                   + "\n" +
+                   "2) Description"
+                   + "\n" +
+                   "3) Estimated time to master"
+                   + "\n" +
+                   "4) Used time"
+                   + "\n" +
+                   "5) Source"
+                   + "\n" +
+                   "6) Day you started"
+                   + "\n" +
+                   "7) Day you finished"
+                   );
 
-
-
-                    //Aiheen muokkaaminen
                     Console.WriteLine("Select a number you want to edit and type the number: ");
                     int typedNum = int.Parse(Console.ReadLine());
 
-                    if (typedNum == 2)
+                    var haeTopic = table.Topics.Where(x => x.Id == typedNum).Single();
+
+                    if (typedNum == 1)
                     {
                         Console.WriteLine("Write new Title: ");
                         string newTitle = Console.ReadLine();
 
-                        t.TheTitle = newTitle;
+                        haeTopic.Title = newTitle;
                         Console.WriteLine("CHANGE COMPLETED!");
-                        Console.WriteLine("Your new title is: " + t.TheTitle);
+                        Console.WriteLine("Your new title is: " + haeTopic.Title);
                     }
 
-                    if(typedNum == 3)
+                    if (typedNum == 2)
                     {
                         Console.WriteLine("Write new Description: ");
                         string newDescription = Console.ReadLine();
 
-                        t.TheDescription = newDescription;
+                        haeTopic.Description = newDescription;
                         Console.WriteLine("CHANGE COMPLETED!");
-                        Console.WriteLine("Your new description is: " + t.TheDescription);
+                        Console.WriteLine("Your new description is: " + haeTopic.Description);
                     }
 
-                    if(typedNum == 4)
+                    if (typedNum == 3)
                     {
                         Console.WriteLine("Write new estimated time to master: ");
-                        double newTimeToMaster = double.Parse(Console.ReadLine());
+                        int newTimeToMaster = int.Parse(Console.ReadLine());
 
-                        t.EstimatedTimeToMaster = newTimeToMaster;
+                        haeTopic.TimeToMaster = newTimeToMaster;
                         Console.WriteLine("CHANGE COMPLETED!");
-                        Console.WriteLine("Your new estimated time is: " + t.EstimatedTimeToMaster);
+                        Console.WriteLine("Your new estimated time is: " + haeTopic.TimeToMaster);
                     }
 
-                    if(typedNum == 5)
+                    if (typedNum == 4)
                     {
                         Console.WriteLine("Write new used time: ");
-                        double newTimeToMaster = double.Parse(Console.ReadLine());
+                        int newTimeToMaster = int.Parse(Console.ReadLine());
 
-                        t.TheUsedTime = newTimeToMaster;
+                        haeTopic.TimeSpend = newTimeToMaster;
                         Console.WriteLine("CHANGE COMPLETED!");
-                        Console.WriteLine("Your new estimated time is: " + t.TheUsedTime);
+                        Console.WriteLine("Your new estimated time is: " + haeTopic.TimeSpend);
                     }
 
-                    if(typedNum == 6)
+                    if (typedNum == 5)
                     {
                         Console.WriteLine("Write new source: ");
                         string newSource = Console.ReadLine();
 
-                        t.TheSource = newSource;
+                        haeTopic.Source = newSource;
                         Console.WriteLine("CHANGE COMPLETED!");
-                        Console.WriteLine("Your new source is: " + t.TheSource);
+                        Console.WriteLine("Your new source is: " + haeTopic.Source);
                     }
 
-                    if(typedNum == 7)
+                    if (typedNum == 6)
                     {
                         Console.WriteLine("Change the starting date: ");
                         DateTime newStartingDate = Convert.ToDateTime(Console.ReadLine());
 
-                        t.StartLearning = newStartingDate;
+                        haeTopic.StartLearningDate = newStartingDate;
                         Console.WriteLine("CHANGE COMPLETED!");
-                        Console.WriteLine("Your new starting date is: " + t.StartLearning.ToShortDateString());
+                        Console.WriteLine("Your new starting date is: " + haeTopic.StartLearningDate);
                     }
 
-                    if (typedNum == 8)
+                    if (typedNum == 7)
                     {
-                        Console.WriteLine("Change the starting date: ");
+                        Console.WriteLine("Change the ending date: ");
                         DateTime newEndDate = Convert.ToDateTime(Console.ReadLine());
 
-                        t.StartLearning = newEndDate;
+                        haeTopic.CompletionDate = newEndDate;
                         Console.WriteLine("CHANGE COMPLETED!");
-                        Console.WriteLine("Your new ending date is: " + t.FinishedLearning.ToShortDateString());
+                        Console.WriteLine("Your new ending date is: " + haeTopic.CompletionDate);
                     }
-                }
-               
-            }
 
-            else
-            {
-                Console.WriteLine("You added " + inputsList.Count + " new topics");
-                Console.WriteLine(" ");
-                foreach (Topics item in inputsList)
-                {
-                    Console.WriteLine(item);
+                    table.SaveChanges();
                 }
             }
 
 
-
-            //Lisätyn aiheen poistaminen
-            Console.WriteLine("Delete topic with ID number: yes or no ");
-            string deleteAnswer = Console.ReadLine();
-
-            if(deleteAnswer.ToLower() == "yes")
-            {
-                Console.WriteLine("write id number: ");
-                int deleteNum = int.Parse(Console.ReadLine());
-               
-                inputsList.RemoveAll(x => x.Id == deleteNum);
-                                            
-            }
-
-
-            //Tiedostoon lisääminen
-            if (File.Exists(path))
-            {
-                File.AppendAllText(path, string.Join(Environment.NewLine, inputsList));
-            }
         }
 
-
-
-        static void ExposeTheTextFile()
-        {
-            string path = @"C:\Users\ChristianKeihäs\source\repos\LearningDiary\Topics.txt";
-            Console.WriteLine("Would you like to see your topics so far? Type yes or no: ");
-            string exposeFiles = Console.ReadLine();
-
-            if(exposeFiles.ToLower() == "yes")
-            {
-                if(new FileInfo(path).Length == 0)
-                {
-                    Console.WriteLine("You have empty file");
-                }
-
-                if (File.Exists(path)) 
-                {
-                    try
-                    {
-                        string readTextFile = File.ReadAllText(path);
-                        Console.WriteLine(readTextFile);
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine("File doesn't exist");
-                        Console.WriteLine(e.Message);
-                    }
-                }
-                
-            }
-        }
-    }
-
-
-    class Topics
-    {
-        public int Id { get; set; }
-        public string TheTitle { get; set; }
-        public string TheDescription { get; set; }
-        public double EstimatedTimeToMaster { get; set; }
-        public double TheUsedTime { get; set; }
-        public string TheSource { get; set; }
-        public bool InProgress { get; set; }
-        public DateTime StartLearning { get; set; }
-        public DateTime FinishedLearning { get; set; }
-
-        public override string ToString()
-        {
-            string overriding = "";
-
-            overriding += "ID: " + Id + "\n";
-            overriding += "Title: " + TheTitle + "\n";
-            overriding += "Description: " + TheDescription + "\n";
-            overriding += "Estimated time to master: " + EstimatedTimeToMaster + "\n";
-            overriding += "Used time so far: " + TheUsedTime + "\n";
-            overriding += "Sources: " + TheSource + "\n";
-            overriding += "Are you still learning: " + InProgress + "\n";
-            overriding += "You started learning: " + StartLearning.ToShortDateString() + "\n";
-            overriding += "You finished learning: " + FinishedLearning.ToShortDateString() + "\n";
-
-
-            return overriding;
-        }
-
-        public static void Edit()
-        {
-            Console.WriteLine("Select topic you want to edit and press the number of topic: ");
-            int typedNum = int.Parse(Console.ReadLine());
-
-            Console.WriteLine(
-                "1) ID " 
-                + "\n" +
-                "2) Title"
-                + "\n" +
-                "3) Description"
-                + "\n" +
-                "4) Estimated time to master"
-                + "\n" +
-                "5) Used time"
-                + "\n" +
-                "6) Source"
-                + "\n" +
-                "7) Day you started"
-                + "\n" +
-                "8) Day you finished"
-                );
-        }
     }
 }
