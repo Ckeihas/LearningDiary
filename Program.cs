@@ -16,8 +16,6 @@ namespace LearningDiary
 
         }
 
-
-
         static void HandlingUserInputs()
         {
 
@@ -30,7 +28,7 @@ namespace LearningDiary
 
                 Console.WriteLine("MAIN MENU");
                 Console.WriteLine(" ");
-                Console.WriteLine("A) Add a new topic \n " +
+                Console.WriteLine("A) Add a new topic \n" +
                     "B) Search topics with ID \n" +
                     "C) Edit your topics \n" +
                     "D) Delete topics");
@@ -98,6 +96,8 @@ namespace LearningDiary
 
                         }
 
+                        table.Topics.Add(userInput);
+                        table.SaveChanges();
 
                         //Lisää uusi topic tai poistu
                         Console.WriteLine("Do you want to add another topic? Type yes or no: ");
@@ -115,8 +115,6 @@ namespace LearningDiary
                             newTopic = false;
                         }
 
-                        table.Topics.Add(userInput);
-                        table.SaveChanges();
                     }
                     while (newTopic);
 
@@ -240,6 +238,29 @@ namespace LearningDiary
                     }
 
                     table.SaveChanges();
+                }
+                
+
+                //Poista topic
+                if(mainMenuAnswer.ToLower() == "d")
+                {
+                    Console.WriteLine("Write ID number that you want to delete: ");
+                    int deleteAnswer = int.Parse(Console.ReadLine());
+
+                    var showDeleteTopic = table.Topics.Select(x => x.Id == deleteAnswer);
+                    foreach (var item in showDeleteTopic)
+                    {
+                        Console.WriteLine(item);
+                    }
+
+                    Console.WriteLine("Do you want to delete this topic? Type yes or no: ");
+                    string delete = Console.ReadLine();
+
+                    var deleteTopic = table.Topics.FirstOrDefault(x => x.Id == deleteAnswer);
+                    if (delete.ToLower() == "yes" && delete != null)
+                    {
+                        table.Topics.Remove(deleteTopic);
+                    }
                 }
             }
 
