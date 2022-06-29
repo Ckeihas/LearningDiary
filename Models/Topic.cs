@@ -16,5 +16,20 @@ namespace LearningDiary.Models
         public DateTime? StartLearningDate { get; set; }
         public DateTime? CompletionDate { get; set; }
         public bool? InProgress { get; set; }
+
+        public override string ToString()
+        {
+            string overriding = "";
+            overriding += Title;
+            overriding += Description;
+            overriding += TimeToMaster;
+            overriding += TimeSpend;
+            overriding += Source;
+            overriding += StartLearningDate;
+            overriding += CompletionDate;
+            overriding += InProgress;
+
+            return overriding;
+        }
     }
 }

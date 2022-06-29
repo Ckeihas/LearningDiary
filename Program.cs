@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using LearningDiary.Models;
+using LauraJaChristianHarkka;
+using TopicQuestions;
 
 namespace LearningDiary
 {
@@ -14,11 +16,14 @@ namespace LearningDiary
             Console.WriteLine(" ");
             HandlingUserInputs();
 
+            
         }
+
 
         static void HandlingUserInputs()
         {
-
+            Class1 compare = new Class1();
+            
             bool newTopic = true;
 
             using (LearningDiaryContext table = new LearningDiaryContext())
@@ -43,23 +48,71 @@ namespace LearningDiary
                     do
                     {
 
-                        Console.WriteLine("Write the title: ");
-                        userInput.Title = Console.ReadLine();
+                        while (true)
+                        {
+                            try
+                            {
+                                Console.WriteLine("Write the title: ");
+                                userInput.Title = Console.ReadLine();
+                                break;
+                            }
+                            catch
+                            {
+
+                                Console.WriteLine("Error! Write valid Title");
+                            } 
+                        }
 
                         Console.WriteLine(" ");
 
-                        Console.WriteLine("Write the description: ");
-                        userInput.Description = Console.ReadLine();
+                        while (true)
+                        {
+                            try
+                            {
+                                Console.WriteLine("Write the description: ");
+                                userInput.Description = Console.ReadLine();
+                                break;
+                            }
+                            catch
+                            {
+
+                                Console.WriteLine("Error! Write valid Description");
+                            } 
+                        }
 
                         Console.WriteLine(" ");
 
-                        Console.WriteLine("How much time do you think you gonna spend: ");
-                        userInput.TimeToMaster = int.Parse(Console.ReadLine());
+                        while (true)
+                        {
+                            try
+                            {
+                                Console.WriteLine("How much time do you think you gonna spend: ");
+                                userInput.TimeToMaster = int.Parse(Console.ReadLine());
+                                break;
+                            }
+                            catch
+                            {
+
+                                Console.WriteLine("Error! Write only numbers");
+                            } 
+                        }
 
                         Console.WriteLine(" ");
 
-                        Console.WriteLine("How much time you have used so far?: ");
-                        userInput.TimeSpend = int.Parse(Console.ReadLine());
+                        while (true)
+                        {
+                            try
+                            {
+                                Console.WriteLine("How much time you have used so far?: ");
+                                userInput.TimeSpend = int.Parse(Console.ReadLine());
+                                break;
+                            }
+                            catch
+                            {
+
+                                Console.WriteLine("Error! Write only numbers");
+                            } 
+                        }
 
                         Console.WriteLine(" ");
 
@@ -71,10 +124,16 @@ namespace LearningDiary
                         Console.WriteLine("Write the date you started learning: dd/mm/yyyy");
                         userInput.StartLearningDate = Convert.ToDateTime(Console.ReadLine());
 
+                        //Paritehtävä
+                        bool tulos = compare.IsFuture((DateTime)userInput.StartLearningDate);
+
+                        Console.WriteLine(tulos);
+
                         Console.WriteLine(" ");
 
                         Console.WriteLine("Is your learning progress still going? Type yes or no: ");
                         string isGoing = Console.ReadLine();
+
 
 
                         Console.WriteLine(" ");
@@ -95,6 +154,14 @@ namespace LearningDiary
                             Console.WriteLine(" ");
 
                         }
+
+                        //Paritehtävä
+                        //compare.Start((DateTime)userInput.StartLearningDate, (double)userInput.TimeToMaster);
+
+                        TimeSpan ts = TimeSpan.FromDays((long)userInput.TimeToMaster);
+
+                        compare.IsLate((DateTime)userInput.StartLearningDate, (DateTime)userInput.CompletionDate, ts);
+
 
                         table.Topics.Add(userInput);
                         table.SaveChanges();
@@ -122,18 +189,19 @@ namespace LearningDiary
                 }
 
 
+                ShowWithId(mainMenuAnswer);
                 //Näytä topic haetulla ID numerolla
-                if (mainMenuAnswer.ToLower() == "b")
-                {
-                    Console.WriteLine("Write the ID number: ");
-                    int searchIdNum = int.Parse(Console.ReadLine());
+                //if (mainMenuAnswer.ToLower() == "b")
+                //{
+                //    Console.WriteLine("Write the ID number: ");
+                //    int searchIdNum = int.Parse(Console.ReadLine());
 
-                    var showTopic = table.Topics.Where(x => x.Id == searchIdNum);
-                    foreach (var item in showTopic)
-                    {
-                        Console.WriteLine(item);
-                    }
-                }
+                //    var showTopic = table.Topics.Where(x => x.Id == searchIdNum);
+                //    foreach (var item in showTopic)
+                //    {
+                //        Console.WriteLine(item);
+                //    }
+                //}
 
 
                 //Editoi topicia haetulla id numerolla
@@ -262,9 +330,30 @@ namespace LearningDiary
                         table.Topics.Remove(deleteTopic);
                     }
                 }
+
             }
 
 
+        }
+
+
+        //Show topic with id num
+        public static void ShowWithId(string mainMenuAnswer)
+        {
+            using (LearningDiaryContext ld = new LearningDiaryContext())
+            {
+                if (mainMenuAnswer.ToLower() == "b")
+                {
+                    Console.WriteLine("Write the ID number: ");
+                    int searchIdNum = int.Parse(Console.ReadLine());
+                 
+                    var showTopic = ld.Topics.Where(x => x.Id == searchIdNum);
+                    foreach (var item in showTopic)
+                    {
+                        Console.WriteLine(item);
+                    }
+                }
+            }
         }
 
     }
