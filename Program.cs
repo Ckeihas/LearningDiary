@@ -121,8 +121,20 @@ namespace LearningDiary
 
                         Console.WriteLine(" ");
 
-                        Console.WriteLine("Write the date you started learning: dd/mm/yyyy");
-                        userInput.StartLearningDate = Convert.ToDateTime(Console.ReadLine());
+                        while (true)
+                        {
+                            try
+                            {
+                                Console.WriteLine("Write the date you started learning: dd/mm/yyyy");
+                                userInput.StartLearningDate = Convert.ToDateTime(Console.ReadLine());
+                                break;
+                            }
+                            catch
+                            {
+
+                                Console.WriteLine("Write a valid date");
+                            } 
+                        }
 
                         //Paritehtävä
                         bool tulos = compare.IsFuture((DateTime)userInput.StartLearningDate);
@@ -189,28 +201,34 @@ namespace LearningDiary
                 }
 
 
+                //Näytä haettu topic
                 ShowWithId(mainMenuAnswer);
-                //Näytä topic haetulla ID numerolla
-                //if (mainMenuAnswer.ToLower() == "b")
-                //{
-                //    Console.WriteLine("Write the ID number: ");
-                //    int searchIdNum = int.Parse(Console.ReadLine());
 
-                //    var showTopic = table.Topics.Where(x => x.Id == searchIdNum);
-                //    foreach (var item in showTopic)
-                //    {
-                //        Console.WriteLine(item);
-                //    }
-                //}
+                //Poista topic
+                DeleteTopic(mainMenuAnswer);
+
+                //Editoi topicia
+                EditTopic(mainMenuAnswer);
+                
+
+            }
 
 
-                //Editoi topicia haetulla id numerolla
+        }
+
+
+
+        //Editoi topicia
+        public static void EditTopic(string mainMenuAnswer)
+        {
+            using (LearningDiaryContext ld = new LearningDiaryContext())
+            {
                 if (mainMenuAnswer.ToLower() == "c")
                 {
                     Console.WriteLine("Write topics ID number what you want to edit: ");
                     int editAnswer = int.Parse(Console.ReadLine());
 
-                    var editTopic = table.Topics.Where(x => x.Id == editAnswer);
+                    var editTopic = ld.Topics.Where(x => x.Id == editAnswer);
 
 
 
@@ -233,7 +251,7 @@ namespace LearningDiary
                     Console.WriteLine("Select a number you want to edit and type the number: ");
                     int typedNum = int.Parse(Console.ReadLine());
 
-                    var haeTopic = table.Topics.Where(x => x.Id == typedNum).Single();
+                    var haeTopic = ld.Topics.Where(x => x.Id == typedNum).Single();
 
                     if (typedNum == 1)
                     {
@@ -305,17 +323,25 @@ namespace LearningDiary
                         Console.WriteLine("Your new ending date is: " + haeTopic.CompletionDate);
                     }
 
-                    table.SaveChanges();
+                    ld.SaveChanges();
                 }
-                
+            }
+        }
 
-                //Poista topic
-                if(mainMenuAnswer.ToLower() == "d")
+
+
+
+        //Poista topic
+        public static void DeleteTopic(string mainMenuAnswer)
+        {
+            using (LearningDiaryContext ld = new LearningDiaryContext())
+            {
+                if (mainMenuAnswer.ToLower() == "d")
                 {
                     Console.WriteLine("Write ID number that you want to delete: ");
                     int deleteAnswer = int.Parse(Console.ReadLine());
 
-                    var showDeleteTopic = table.Topics.Select(x => x.Id == deleteAnswer);
+                    var showDeleteTopic = ld.Topics.Select(x => x.Id == deleteAnswer);
                     foreach (var item in showDeleteTopic)
                     {
                         Console.WriteLine(item);
@@ -324,20 +350,21 @@ namespace LearningDiary
                     Console.WriteLine("Do you want to delete this topic? Type yes or no: ");
                     string delete = Console.ReadLine();
 
-                    var deleteTopic = table.Topics.FirstOrDefault(x => x.Id == deleteAnswer);
+                    var deleteTopic = ld.Topics.FirstOrDefault(x => x.Id == deleteAnswer);
                     if (delete.ToLower() == "yes" && delete != null)
                     {
-                        table.Topics.Remove(deleteTopic);
+                        ld.Topics.Remove(deleteTopic);
                     }
                 }
-
             }
-
-
+                
         }
 
 
-        //Show topic with id num
+
+
+
+        //Näytä topic haetulla ID numerolla
         public static void ShowWithId(string mainMenuAnswer)
         {
             using (LearningDiaryContext ld = new LearningDiaryContext())
