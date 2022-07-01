@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 using System.Linq;
 using LearningDiary.Models;
 using LauraJaChristianHarkka;
@@ -10,17 +11,17 @@ namespace LearningDiary
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
 
             Console.WriteLine(" ");
-            HandlingUserInputs();
+            await HandlingUserInputs();
 
             
         }
 
 
-        static void HandlingUserInputs()
+        static async Task HandlingUserInputs()
         {
             Class1 compare = new Class1();
             
@@ -202,13 +203,13 @@ namespace LearningDiary
 
 
                 //Näytä haettu topic
-                ShowWithId(mainMenuAnswer);
+                await ShowWithId(mainMenuAnswer);
 
                 //Poista topic
-                DeleteTopic(mainMenuAnswer);
+                await DeleteTopic(mainMenuAnswer);
 
                 //Editoi topicia
-                EditTopic(mainMenuAnswer);
+                await EditTopic(mainMenuAnswer);
                 
 
             }
@@ -219,8 +220,9 @@ namespace LearningDiary
 
 
         //Editoi topicia
-        public static void EditTopic(string mainMenuAnswer)
+        public static async Task EditTopic(string mainMenuAnswer)
         {
+            Topic olio = new Topic();
             using (LearningDiaryContext ld = new LearningDiaryContext())
             {
                 if (mainMenuAnswer.ToLower() == "c")
@@ -228,7 +230,7 @@ namespace LearningDiary
                     Console.WriteLine("Write topics ID number what you want to edit: ");
                     int editAnswer = int.Parse(Console.ReadLine());
 
-                    var editTopic = ld.Topics.Where(x => x.Id == editAnswer);
+                    var editTopic = await Task.Run(() => ld.Topics.Where(x => x.Id == editAnswer));
 
 
 
@@ -248,19 +250,23 @@ namespace LearningDiary
                    "7) Day you finished"
                    );
 
+                    
+
                     Console.WriteLine("Select a number you want to edit and type the number: ");
                     int typedNum = int.Parse(Console.ReadLine());
 
-                    var haeTopic = ld.Topics.Where(x => x.Id == typedNum).Single();
+                    //var haeTopic = ld.Topics.Where(x => x.Id == typedNum).Single();
 
                     if (typedNum == 1)
                     {
                         Console.WriteLine("Write new Title: ");
                         string newTitle = Console.ReadLine();
 
-                        haeTopic.Title = newTitle;
+                        var editTitle = editTopic.Select(x => x.Title).ToString();
+                        editTitle = newTitle;
                         Console.WriteLine("CHANGE COMPLETED!");
-                        Console.WriteLine("Your new title is: " + haeTopic.Title);
+                        Console.WriteLine("Your new title is: " + newTitle);
+
                     }
 
                     if (typedNum == 2)
@@ -268,9 +274,9 @@ namespace LearningDiary
                         Console.WriteLine("Write new Description: ");
                         string newDescription = Console.ReadLine();
 
-                        haeTopic.Description = newDescription;
+                        editTopic.Select(x => x.Description == newDescription);
                         Console.WriteLine("CHANGE COMPLETED!");
-                        Console.WriteLine("Your new description is: " + haeTopic.Description);
+                        Console.WriteLine("Your new description is: " + newDescription);
                     }
 
                     if (typedNum == 3)
@@ -278,19 +284,19 @@ namespace LearningDiary
                         Console.WriteLine("Write new estimated time to master: ");
                         int newTimeToMaster = int.Parse(Console.ReadLine());
 
-                        haeTopic.TimeToMaster = newTimeToMaster;
+                        editTopic.Select(x => x.TimeToMaster == newTimeToMaster);
                         Console.WriteLine("CHANGE COMPLETED!");
-                        Console.WriteLine("Your new estimated time is: " + haeTopic.TimeToMaster);
+                        Console.WriteLine("Your new estimated time is: " + newTimeToMaster);
                     }
 
                     if (typedNum == 4)
                     {
                         Console.WriteLine("Write new used time: ");
-                        int newTimeToMaster = int.Parse(Console.ReadLine());
+                        int newTimeSpend = int.Parse(Console.ReadLine());
 
-                        haeTopic.TimeSpend = newTimeToMaster;
+                        editTopic.Select(x => x.TimeSpend == newTimeSpend);
                         Console.WriteLine("CHANGE COMPLETED!");
-                        Console.WriteLine("Your new estimated time is: " + haeTopic.TimeSpend);
+                        Console.WriteLine("Your new estimated time is: " + newTimeSpend);
                     }
 
                     if (typedNum == 5)
@@ -298,9 +304,9 @@ namespace LearningDiary
                         Console.WriteLine("Write new source: ");
                         string newSource = Console.ReadLine();
 
-                        haeTopic.Source = newSource;
+                        editTopic.Select(x => x.Source == newSource);
                         Console.WriteLine("CHANGE COMPLETED!");
-                        Console.WriteLine("Your new source is: " + haeTopic.Source);
+                        Console.WriteLine("Your new source is: " + newSource);
                     }
 
                     if (typedNum == 6)
@@ -308,9 +314,9 @@ namespace LearningDiary
                         Console.WriteLine("Change the starting date: ");
                         DateTime newStartingDate = Convert.ToDateTime(Console.ReadLine());
 
-                        haeTopic.StartLearningDate = newStartingDate;
+                        editTopic.Select(x => x.StartLearningDate == newStartingDate);
                         Console.WriteLine("CHANGE COMPLETED!");
-                        Console.WriteLine("Your new starting date is: " + haeTopic.StartLearningDate);
+                        Console.WriteLine("Your new starting date is: " + newStartingDate);
                     }
 
                     if (typedNum == 7)
@@ -318,9 +324,9 @@ namespace LearningDiary
                         Console.WriteLine("Change the ending date: ");
                         DateTime newEndDate = Convert.ToDateTime(Console.ReadLine());
 
-                        haeTopic.CompletionDate = newEndDate;
+                        editTopic.Select(x => x.CompletionDate == newEndDate);
                         Console.WriteLine("CHANGE COMPLETED!");
-                        Console.WriteLine("Your new ending date is: " + haeTopic.CompletionDate);
+                        Console.WriteLine("Your new ending date is: " + newEndDate);
                     }
 
                     ld.SaveChanges();
@@ -332,7 +338,7 @@ namespace LearningDiary
 
 
         //Poista topic
-        public static void DeleteTopic(string mainMenuAnswer)
+        public static async Task DeleteTopic(string mainMenuAnswer)
         {
             using (LearningDiaryContext ld = new LearningDiaryContext())
             {
@@ -341,7 +347,7 @@ namespace LearningDiary
                     Console.WriteLine("Write ID number that you want to delete: ");
                     int deleteAnswer = int.Parse(Console.ReadLine());
 
-                    var showDeleteTopic = ld.Topics.Select(x => x.Id == deleteAnswer);
+                    var showDeleteTopic = ld.Topics.Where(x => x.Id == deleteAnswer);
                     foreach (var item in showDeleteTopic)
                     {
                         Console.WriteLine(item);
@@ -350,10 +356,10 @@ namespace LearningDiary
                     Console.WriteLine("Do you want to delete this topic? Type yes or no: ");
                     string delete = Console.ReadLine();
 
-                    var deleteTopic = ld.Topics.FirstOrDefault(x => x.Id == deleteAnswer);
+                    //var deleteTopic = await Task.Run(() => ld.Topics.FirstOrDefault(x => x.Id == deleteAnswer));
                     if (delete.ToLower() == "yes" && delete != null)
                     {
-                        ld.Topics.Remove(deleteTopic);
+                        ld.Topics.Remove((Topic)showDeleteTopic);
                     }
                 }
             }
@@ -365,7 +371,7 @@ namespace LearningDiary
 
 
         //Näytä topic haetulla ID numerolla
-        public static void ShowWithId(string mainMenuAnswer)
+        public static async Task ShowWithId(string mainMenuAnswer)
         {
             using (LearningDiaryContext ld = new LearningDiaryContext())
             {
@@ -374,7 +380,8 @@ namespace LearningDiary
                     Console.WriteLine("Write the ID number: ");
                     int searchIdNum = int.Parse(Console.ReadLine());
                  
-                    var showTopic = ld.Topics.Where(x => x.Id == searchIdNum);
+                    var showTopic = await Task.Run(()=> ld.Topics.Where(x => x.Id == searchIdNum));
+
                     foreach (var item in showTopic)
                     {
                         Console.WriteLine(item);
