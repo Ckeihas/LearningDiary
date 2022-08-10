@@ -168,12 +168,13 @@ namespace LearningDiary
 
                         }
 
-                        //Paritehtävä
-                        //compare.Start((DateTime)userInput.StartLearningDate, (double)userInput.TimeToMaster);
+                        /*Paritehtävä
+                        compare.Start((DateTime)userInput.StartLearningDate, (double)userInput.TimeToMaster);
 
                         TimeSpan ts = TimeSpan.FromDays((long)userInput.TimeToMaster);
 
                         compare.IsLate((DateTime)userInput.StartLearningDate, (DateTime)userInput.CompletionDate, ts);
+                        */
 
 
                         table.Topics.Add(userInput);
@@ -262,8 +263,21 @@ namespace LearningDiary
                         Console.WriteLine("Write new Title: ");
                         string newTitle = Console.ReadLine();
 
-                        var editTitle = editTopic.Select(x => x.Title).ToString();
-                        editTitle = newTitle;
+                        foreach (var x in editTopic)
+                        {
+                            x.Title = newTitle;
+                        }
+
+                        try
+                        {
+                            ld.SaveChanges();
+                        }
+                        catch (Exception e)
+                        {
+
+                            Console.WriteLine(e);
+                        }
+                        
                         Console.WriteLine("CHANGE COMPLETED!");
                         Console.WriteLine("Your new title is: " + newTitle);
 
@@ -274,7 +288,21 @@ namespace LearningDiary
                         Console.WriteLine("Write new Description: ");
                         string newDescription = Console.ReadLine();
 
-                        editTopic.Select(x => x.Description == newDescription);
+                        foreach (var x in editTopic)
+                        {
+                            x.Description = newDescription;
+                        }
+
+                        try
+                        {
+                            ld.SaveChanges();
+                        }
+                        catch (Exception e)
+                        {
+
+                            Console.WriteLine(e);
+                        }
+
                         Console.WriteLine("CHANGE COMPLETED!");
                         Console.WriteLine("Your new description is: " + newDescription);
                     }
@@ -284,9 +312,23 @@ namespace LearningDiary
                         Console.WriteLine("Write new estimated time to master: ");
                         int newTimeToMaster = int.Parse(Console.ReadLine());
 
-                        editTopic.Select(x => x.TimeToMaster == newTimeToMaster);
+                        foreach (var x in editTopic)
+                        {
+                            x.TimeToMaster = newTimeToMaster;
+                        }
+
+                        try
+                        {
+                            ld.SaveChanges();
+                        }
+                        catch (Exception e)
+                        {
+
+                            Console.WriteLine(e);
+                        }
+
                         Console.WriteLine("CHANGE COMPLETED!");
-                        Console.WriteLine("Your new estimated time is: " + newTimeToMaster);
+                        Console.WriteLine("Your new time to master is: " + newTimeToMaster);
                     }
 
                     if (typedNum == 4)
@@ -294,9 +336,23 @@ namespace LearningDiary
                         Console.WriteLine("Write new used time: ");
                         int newTimeSpend = int.Parse(Console.ReadLine());
 
-                        editTopic.Select(x => x.TimeSpend == newTimeSpend);
+                        foreach (var x in editTopic)
+                        {
+                            x.TimeSpend = newTimeSpend;
+                        }
+
+                        try
+                        {
+                            ld.SaveChanges();
+                        }
+                        catch (Exception e)
+                        {
+
+                            Console.WriteLine(e);
+                        }
+
                         Console.WriteLine("CHANGE COMPLETED!");
-                        Console.WriteLine("Your new estimated time is: " + newTimeSpend);
+                        Console.WriteLine("Your new used time is: " + newTimeSpend);
                     }
 
                     if (typedNum == 5)
@@ -304,7 +360,21 @@ namespace LearningDiary
                         Console.WriteLine("Write new source: ");
                         string newSource = Console.ReadLine();
 
-                        editTopic.Select(x => x.Source == newSource);
+                        foreach (var x in editTopic)
+                        {
+                            x.Source = newSource;
+                        }
+
+                        try
+                        {
+                            ld.SaveChanges();
+                        }
+                        catch (Exception e)
+                        {
+
+                            Console.WriteLine(e);
+                        }
+
                         Console.WriteLine("CHANGE COMPLETED!");
                         Console.WriteLine("Your new source is: " + newSource);
                     }
@@ -314,7 +384,21 @@ namespace LearningDiary
                         Console.WriteLine("Change the starting date: ");
                         DateTime newStartingDate = Convert.ToDateTime(Console.ReadLine());
 
-                        editTopic.Select(x => x.StartLearningDate == newStartingDate);
+                        foreach (var x in editTopic)
+                        {
+                            x.StartLearningDate = newStartingDate;
+                        }
+
+                        try
+                        {
+                            ld.SaveChanges();
+                        }
+                        catch (Exception e)
+                        {
+
+                            Console.WriteLine(e);
+                        }
+
                         Console.WriteLine("CHANGE COMPLETED!");
                         Console.WriteLine("Your new starting date is: " + newStartingDate);
                     }
@@ -324,9 +408,23 @@ namespace LearningDiary
                         Console.WriteLine("Change the ending date: ");
                         DateTime newEndDate = Convert.ToDateTime(Console.ReadLine());
 
-                        editTopic.Select(x => x.CompletionDate == newEndDate);
+                        foreach (var x in editTopic)
+                        {
+                            x.CompletionDate = newEndDate;
+                        }
+
+                        try
+                        {
+                            ld.SaveChanges();
+                        }
+                        catch (Exception e)
+                        {
+
+                            Console.WriteLine(e);
+                        }
+
                         Console.WriteLine("CHANGE COMPLETED!");
-                        Console.WriteLine("Your new ending date is: " + newEndDate);
+                        Console.WriteLine("Your new end date is: " + newEndDate);
                     }
 
                     ld.SaveChanges();
@@ -356,12 +454,14 @@ namespace LearningDiary
                     Console.WriteLine("Do you want to delete this topic? Type yes or no: ");
                     string delete = Console.ReadLine();
 
-                    //var deleteTopic = await Task.Run(() => ld.Topics.FirstOrDefault(x => x.Id == deleteAnswer));
-                    if (delete.ToLower() == "yes" && delete != null)
+                    var deleteTopic = await Task.Run(() => ld.Topics.FirstOrDefault(x => x.Id == deleteAnswer));
+                    if (delete.ToLower() == "yes")
                     {
-                        ld.Topics.Remove((Topic)showDeleteTopic);
+                        ld.Topics.Remove(deleteTopic);
                     }
                 }
+
+                ld.SaveChanges();
             }
                 
         }
